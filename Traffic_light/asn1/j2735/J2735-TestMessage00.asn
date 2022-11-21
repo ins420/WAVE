@@ -1,0 +1,29 @@
+TestMessage00
+{joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+j2735 (2735) part-0 (0) asn1-module (1) testMessage00 (22) version-1 (1)}
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+IMPORTS 
+	Reg-TestMessage00
+		FROM REGION {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) region (2) version-1 (1)}
+	Header, 
+	RegionalExtension
+		FROM Common {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) common (38) version-1 (1)};
+
+
+
+
+
+TestMessage00 ::= SEQUENCE {
+   header    Header   OPTIONAL,
+   regional  RegionalExtension {{Reg-TestMessage00}} OPTIONAL,
+   ...
+   }
+END
+

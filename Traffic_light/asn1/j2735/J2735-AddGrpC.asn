@@ -1,0 +1,113 @@
+AddGrpC
+{joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+j2735 (2735) part-0 (0) asn1-module (1) addgrpc (3) version-1 (1)}
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+IMPORTS 
+	StationID, 
+	PrioritizationResponseStatus, 
+	SignalGroupID, 
+	NodeOffsetPointXY, 
+	LaneID
+		FROM Common {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) common (38) version-1 (1)};
+ 
+ 
+AltitudeConfidence ::= ENUMERATED {
+   alt-000-01,  -- accuracy within    0.01 meter
+   alt-000-02,  -- accuracy within    0.02 meter
+   alt-000-05,  -- accuracy within    0.05 meter
+   alt-000-10,  -- accuracy within    0.10 meter
+   alt-000-20,  -- accuracy within    0.20 meter
+   alt-000-50,  -- accuracy within    0.50 meter
+   alt-001-00,  -- accuracy within    1.00 meter
+   alt-002-00,  -- accuracy within    2.00 meter
+   alt-005-00,  -- accuracy within    5.00 meter
+   alt-010-00,  -- accuracy within   10.00 meter
+   alt-020-00,  -- accuracy within   20.00 meter
+   alt-050-00,  -- accuracy within   50.00 meter
+   alt-100-00,  -- accuracy within  100.00 meter
+   alt-200-00,  -- accuracy within  200.00 meter
+   outOfRange,  -- accuracy exceeds 200.00 meters
+   unavailable  -- unavailable
+}
+
+AltitudeValue ::= INTEGER (-100000..800001)  -- units of  0.01 meter 
+   -- Where: 
+   -- seaLevel(0), 
+   -- oneCentimeter(1), 
+   -- unavailable(800001)
+
+EmissionType ::= ENUMERATED {
+     typeA,  -- check for proper restrictions
+     typeB,  -- 
+     typeC,  -- 
+     typeD,  -- 
+     typeE,  -- 
+     ...  
+     }
+
+Altitude ::= SEQUENCE {
+   value        AltitudeValue,
+   confidence   AltitudeConfidence
+   }
+
+PrioritizationResponse ::= SEQUENCE {
+   stationID      StationID,
+                  -- Id of requesting vehicle
+                  -- Note that the stationID has to remain unchanged 
+                  -- during the whole prioritizationprocess
+   priorState     PrioritizationResponseStatus,
+                  -- State of prioritization request
+   signalGroup    SignalGroupID,
+                  -- id of prioritized LaneSet, which will 
+                  -- be given free way 
+   ...  
+   }
+
+PrioritizationResponseList ::= SEQUENCE SIZE(1..10) OF PrioritizationResponse
+
+ConnectionManeuverAssist-addGrpC ::= SEQUENCE {
+    vehicleToLanePositions  VehicleToLanePositionList,
+    rsuDistanceFromAnchor   NodeOffsetPointXY OPTIONAL
+}
+
+IntersectionState-addGrpC ::= SEQUENCE { 
+   activePrioritizations PrioritizationResponseList OPTIONAL,
+   ... }
+
+MapData-addGrpC ::= SEQUENCE { 
+   signalHeadLocations   SignalHeadLocationList OPTIONAL,
+   ... 
+   }
+
+Position3D-addGrpC ::= SEQUENCE {
+   altitude    Altitude, 
+   ...
+   }
+
+RestrictionUserType-addGrpC ::= SEQUENCE {
+   emission   EmissionType OPTIONAL,
+   ...
+   }
+
+SignalHeadLocation ::= SEQUENCE {
+   node             NodeOffsetPointXY, -- the location
+   signalGroupID    SignalGroupID,   
+   ...
+}
+
+SignalHeadLocationList ::= SEQUENCE (SIZE(1..20)) OF  SignalHeadLocation
+
+VehicleToLanePosition ::= SEQUENCE {
+    stationID   StationID, 
+    laneID      LaneID,
+    ...  
+    }
+
+VehicleToLanePositionList ::= SEQUENCE SIZE(1..5) OF VehicleToLanePosition
+END
+
