@@ -1,0 +1,65 @@
+EmergencyVehicleAlert
+{joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+j2735 (2735) part-0 (0) asn1-module (1) emergencyVehicleAlert (11) version-1 (1)}
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+IMPORTS 
+	Reg-EmergencyVehicleAlert
+		FROM REGION {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) region (2) version-1 (1)}
+	VehicleGroupAffected, 
+	IncidentResponseEquipment, 
+	ResponderGroupAffected
+		FROM ITIS {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) itis (6) version-1 (1)}
+	RoadSideAlert
+		FROM RoadSideAlert {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) roadSideAlert (16) version-1 (1)}
+	MinuteOfTheYear, 
+	TemporaryID, 
+	ResponseType, 
+	EmergencyDetails, 
+	VehicleMass, 
+	VehicleType, 
+	RegionalExtension
+		FROM Common {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) common (38) version-1 (1)};
+
+
+
+
+
+EmergencyVehicleAlert ::= SEQUENCE {
+   timeStamp       MinuteOfTheYear OPTIONAL,
+   id              TemporaryID OPTIONAL, 
+   rsaMsg          RoadSideAlert, 
+		   -- the DSRCmsgID inside this 
+                   -- data frame is set as per the 
+                   -- RoadSideAlert.  
+   responseType    ResponseType                   OPTIONAL, 
+   details         EmergencyDetails               OPTIONAL,   
+                   -- Combines these 3 items: 
+                   -- SirenInUse,                     
+                   -- LightbarInUse,                  
+                   -- MultiVehicleReponse,
+
+   mass            VehicleMass                    OPTIONAL,
+   basicType       VehicleType                    OPTIONAL,  
+                                -- gross size and axle cnt
+   
+   -- type of vehicle and agency when known
+   vehicleType     VehicleGroupAffected      OPTIONAL,      
+   responseEquip   IncidentResponseEquipment OPTIONAL, 
+   responderType   ResponderGroupAffected    OPTIONAL,    
+   regional        SEQUENCE (SIZE(1..4)) OF 
+                   RegionalExtension {{Reg-EmergencyVehicleAlert}} OPTIONAL,
+   ...
+   }
+END
+

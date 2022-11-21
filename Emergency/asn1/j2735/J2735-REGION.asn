@@ -1,0 +1,169 @@
+REGION
+{joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+j2735 (2735) part-0 (0) asn1-module (1) region (2) version-1 (1)}
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+IMPORTS 
+	ConnectionManeuverAssist-addGrpC, 
+	IntersectionState-addGrpC, 
+	Position3D-addGrpC, 
+	RestrictionUserType-addGrpC, 
+	MapData-addGrpC
+		FROM AddGrpC {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) addgrpc (3) version-1 (1)}
+	LaneDataAttribute-addGrpB, 
+	MovementEvent-addGrpB, 
+	NodeOffsetPointXY-addGrpB, 
+	Position3D-addGrpB
+		FROM AddGrpB {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) addgrpb (4) version-1 (1)}
+	REG-EXT-ID-AND-TYPE,
+	addGrpC,
+	addGrpB
+		FROM Common {joint-iso-itu-t (2) country (16) us (840) organization (1) sae (114566)
+		v2x-communications (1) technical-committees (1) v2x-core (5) technical-reports (1)
+		j2735 (2735) part-0 (0) asn1-module (1) common (38) version-1 (1)};
+ 
+ 
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+-- 
+-- Start of entries from table Dialogs...
+-- This table typically contains dialog and operational exchange entries.
+-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+
+--
+-- Regional data frames with no currently defined extensions
+--
+Reg-AdvisorySpeed         REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-ComputedLane          REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-EventDescription      REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-GenericLane           REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-GeographicalPath      REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-GeometricProjection   REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-IntersectionGeometry  REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-LaneAttributes        REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-MovementState         REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-NodeAttributeSetLL    REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-NodeAttributeSetXY    REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-NodeOffsetPointLL     REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-RequestorDescription  REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-RequestorType         REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-RoadSegment           REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-SignalControlZone     REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-SignalRequest         REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-SignalRequestPackage  REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-SignalStatus          REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-SignalStatusPackage   REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-SupplementalVehicleExtensions REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-VehicleClassification REG-EXT-ID-AND-TYPE ::= { ...  }
+Reg-VerticalOffset        REG-EXT-ID-AND-TYPE ::= { ...  }
+
+--
+-- Data Frames with current adopted expansion point content
+--
+Reg-ConnectionManeuverAssist REG-EXT-ID-AND-TYPE ::= { 
+   { ConnectionManeuverAssist-addGrpC IDENTIFIED BY addGrpC} ,
+   ... 
+   }
+
+Reg-IntersectionState     REG-EXT-ID-AND-TYPE ::= { 
+   { IntersectionState-addGrpC IDENTIFIED BY addGrpC} ,
+   ... 
+   }
+
+Reg-LaneDataAttribute     REG-EXT-ID-AND-TYPE ::= { 
+   { LaneDataAttribute-addGrpB IDENTIFIED BY addGrpB} ,
+   ... 
+   }  
+
+Reg-MovementEvent         REG-EXT-ID-AND-TYPE ::= { 
+   { MovementEvent-addGrpB IDENTIFIED BY addGrpB} ,
+   ... 
+   }   
+
+Reg-NodeOffsetPointXY     REG-EXT-ID-AND-TYPE ::= { 
+   { NodeOffsetPointXY-addGrpB IDENTIFIED BY addGrpB} ,
+   ... 
+   }   
+
+Reg-Position3D            REG-EXT-ID-AND-TYPE ::= { 
+   { Position3D-addGrpB IDENTIFIED BY addGrpB} |
+   { Position3D-addGrpC IDENTIFIED BY addGrpC} ,
+   ... 
+   }   
+
+Reg-RestrictionUserType   REG-EXT-ID-AND-TYPE ::= { 
+   { RestrictionUserType-addGrpC IDENTIFIED BY addGrpC} ,
+   ... 
+   }   
+
+
+
+-- 
+-- The pattern used for regional adaptations is shown below
+-- Use:
+-- the text 'XXX' below is used to represent the name of the entry
+-- the region should replace 'xxx-RegionName' with its own Type Def
+-- a name pattern such as 'DataFrameName-RegionName' is recommended
+-- the 'regionName' value must be assigned from the RegionId element
+-- this value would be defined in the REGION module, unless a well-known 
+-- region was being used (these IDs are defined in the V2X module)
+-- refer to the full standard for additional details
+--
+--Reg-XXX DSRC.REG-EXT-ID-AND-TYPE ::= {
+--   { XXX-RegionName IDENTIFIED BY regionName  },
+--   ... 
+--}
+--regionName DSRC.RegionId ::= 128 
+--XXX-RegionName ::= SEQUENCE { ... }
+--
+-- End example pattern for regional use
+
+
+-- Extension markers for operational messages in the standard
+-- Messages with no currently defined extensions
+Reg-CommonSafetyRequest    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-EmergencyVehicleAlert  REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-IntersectionCollision  REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-NMEAcorrections        REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-ProbeDataManagement    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-ProbeVehicleData       REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-RoadSideAlert          REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-RTCMcorrections        REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-SignalRequestMessage   REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-SignalStatusMessage    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-SPAT                   REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TravelerInformation    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-PersonalSafetyMessage  REG-EXT-ID-AND-TYPE ::= { ... }
+
+-- Messages with current adopted extension marker content
+Reg-MapData                REG-EXT-ID-AND-TYPE ::= { 
+   { MapData-addGrpC IDENTIFIED BY addGrpC},
+   ... 
+   }
+
+
+-- Test Messages
+Reg-TestMessage00    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage01    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage02    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage03    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage04    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage05    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage06    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage07    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage08    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage09    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage10    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage11    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage12    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage13    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage14    REG-EXT-ID-AND-TYPE ::= { ... }
+Reg-TestMessage15    REG-EXT-ID-AND-TYPE ::= { ... }
+END
+
